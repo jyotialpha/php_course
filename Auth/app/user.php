@@ -51,6 +51,8 @@ class User extends Database
       $row = $stmt->fetch(PDO::FETCH_ASSOC);
       // Verify the password
       if (password_verify($this->password, $row['password'])) {
+        $this->id = $row['id'];
+        $this->name = $row['name'];
         return true; // Login successful
       } else {
         return false; // Password incorrect

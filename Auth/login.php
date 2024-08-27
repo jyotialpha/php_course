@@ -1,4 +1,5 @@
 <?php
+session_start();
 include_once 'app/user.php';
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -7,7 +8,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   $user->password = $_POST['password'];
 
   if ($user->login()) {
-    echo "login successful";
+    $_SESSION['user_id'] = $user->id;
+    header('Location:dashboard.php');
   } else {
     echo "login failed";
   }
