@@ -13,6 +13,25 @@ class User extends Database
   // User registration
   public function register()
   {
+
+//**Veryfy the for existing user*/
+// Prepare query to find user by email
+$query = "SELECT id, password,name FROM " . $this->table_name . " WHERE email = :email";
+$stmt = $this->getConnection()->prepare($query);
+
+// Bind parameter
+$stmt->bindParam(':email', $this->email);
+
+// Execute the query
+$stmt->execute();
+
+if($stmt->rowCount()>0){
+  return false;
+}
+//**End of verification */
+
+
+//**Start of registration*/
     // Hash the password for security
     $hashed_password = password_hash($this->password, PASSWORD_DEFAULT);
 
@@ -37,7 +56,7 @@ class User extends Database
   public function login()
   {
     // Prepare query to find user by email
-    $query = "SELECT id, password FROM " . $this->table_name . " WHERE email = :email LIMIT 1";
+    $query = "SELECT id, password,name FROM " . $this->table_name . " WHERE email = :email";
     $stmt = $this->getConnection()->prepare($query);
 
     // Bind parameter

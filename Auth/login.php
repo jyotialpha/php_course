@@ -1,5 +1,5 @@
 <?php
-session_start();
+include_once 'guest.php';
 include_once 'app/user.php';
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -9,15 +9,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
   if ($user->login()) {
     $_SESSION['user_id'] = $user->id;
-    header('Location:dashboard.php');
+    $_SESSION['user_name'] = $user->name;
+    header("Location: dashboard.php");
+    exit();
   } else {
-    echo "login failed";
+    echo "Login failed";
   }
 }
-
 ?>
-
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -32,24 +31,21 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 </head>
 
 <body>
-
   <div class="container">
-    <h2> Login form</h2>
+    <h2>Login Form</h2>
     <form action="login.php" method="POST">
-
       <div class="form-group">
         <label for="email">Email:</label>
-        <input type="email" class="form-control" id="email" placeholder="Enter email" name="email">
+        <input type="email" class="form-control" id="email" placeholder="Enter email" name="email" required>
       </div>
       <div class="form-group">
         <label for="password">Password:</label>
-        <input type="password" class="form-control" id="password" placeholder="Enter password" name="password">
+        <input type="password" class="form-control" id="password" placeholder="Enter password" name="password" required>
       </div>
       <button type="submit" class="btn btn-default">Login</button>
       <a href="reg.php" class="btn btn-default">Registration</a>
     </form>
   </div>
-
 </body>
 
 </html>

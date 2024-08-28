@@ -1,4 +1,5 @@
 <?php
+include_once 'guest.php';
 include_once 'app/user.php';
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {

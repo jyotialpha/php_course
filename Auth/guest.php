@@ -9,8 +9,8 @@ session_start();
 // }
 
 // Check if the session variable for user ID is not set
-if (!isset($_SESSION['user_id'])) {
-  // If the session is not set, redirect the user to the login page
-  header("Location: login.php");
+if (isset($_SESSION['user_id'])) {
+  // If the session is not set, redirect the dashboard to the login page
+  header("Location: dashboard.php");
   exit();
 }
