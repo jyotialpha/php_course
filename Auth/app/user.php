@@ -10,7 +10,7 @@ class User extends Database
   public $password;
 
 
-  // User registration
+  //** User registration
   public function register()
   {
 
@@ -51,8 +51,8 @@ if($stmt->rowCount()>0){
       return false;
     }
   }
-
-  //user login
+//**End the Registration */
+  //**user login
   public function login()
   {
     // Prepare query to find user by email
@@ -80,4 +80,29 @@ if($stmt->rowCount()>0){
       return false; // User not found
     }
   }
+
+  //**Get Usedetails bY id */
+  public function getUserById()
+  {
+      $query = "SELECT name, email FROM " . $this->table_name . " WHERE id = :id LIMIT 1";
+      $stmt = $this->getConnection()->prepare($query);
+      $stmt->bindParam(':id', $this->id);
+      $stmt->execute();
+
+      return $stmt->fetch(PDO::FETCH_ASSOC);
+  }
+
+  //** Update user information
+  public function updateUser()
+  {
+      $query = "UPDATE " . $this->table_name . " SET name = :name, email = :email WHERE id = :id";
+      $stmt = $this->getConnection()->prepare($query);
+      
+      $stmt->bindParam(':name', $this->name);
+      $stmt->bindParam(':email', $this->email);
+      $stmt->bindParam(':id', $this->id);
+
+      return $stmt->execute();
+  }
+
 }

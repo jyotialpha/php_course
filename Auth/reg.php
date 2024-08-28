@@ -37,15 +37,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <form action="reg.php" method="POST">
       <div class="form-group">
         <label for="name">Name:</label>
-        <input type="name" class="form-control" id="name" placeholder="Enter name" name="name">
+        <input type="name" class="form-control" id="name" placeholder="Enter name" name="name" required>
       </div>
       <div class="form-group">
         <label for="email">Email:</label>
-        <input type="email" class="form-control" id="email" placeholder="Enter email" name="email">
+        <input type="email" class="form-control" id="email" placeholder="Enter email" name="email" required>
       </div>
       <div class="form-group">
         <label for="password">Password:</label>
-        <input type="password" class="form-control" id="password" placeholder="Enter password" name="password">
+        <input type="password" class="form-control" id="password" placeholder="Enter password" name="password" required>
       </div>
       <button type="submit" class="btn btn-default">Save</button>
       <a href="login.php" class="btn btn-default">Login</a>
